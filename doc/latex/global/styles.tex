@@ -1,0 +1,61 @@
+
+%% Styles
+%% ==============================================================================
+
+%\pagestyle{fancy}
+\bibliographystyle{../../global/ametsoc}
+\renewcommand{\bibpreamble}{\begin{multicols}{2}}
+\renewcommand{\bibpostamble}{\end{multicols}}
+
+%% Additional fonts
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+%% Page layout
+%\fancyhf{}
+%\fancyhead[LE,RO]{\bfseries\thepage}
+%\fancyhead[LO]{\bfseries\hspace{-0em}\rightmark}
+%\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+%\fancyhead[RE]{\bfseries\leftmark}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\headrulewidth}{0.5pt}
+%\renewcommand{\footrulewidth}{0pt  }
+%\addtolength{\headheight}{2.6pt}
+
+
+%% Catcodes
+%\makeatletter
+%\def\LigneVerticale{\vrule height 5cm depth 2cm\hspace{0.1cm}\relax}
+%\def\LignesVerticales{\let\LV\LigneVerticale\LV\LV\LV\LV\LV\LV\LV\LV\LV\LV}
+%\def\GrosCarreAvecUnChiffre#1{
+%	\rlap{\vrule height 0.8cm width 1cm depth 0.2cm}
+%	\rlap{\hbox to 1cm{\hss\mbox{\color{white} #1}\hss}}
+% 	\vrule height 0pt width 1cm depth 0pt
+%}
+%\def\@makechapterhead#1{
+%	\hbox{
+%		\huge\LignesVerticales\hspace{-0.5cm}
+%		\GrosCarreAvecUnChiffre{\thechapter}\hspace{0.2cm}
+%		\hbox{#1}
+%	}
+%	\par\vskip
+%1cm
+%}
+%\def\@makeschapterhead#1{
+%	\hbox{
+%		\huge\LignesVerticales
+%		\hbox{#1}
+%	}
+%	\par\vskip
+%2cm
+%}
+%\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+%  \hbox{}
+%  \vspace*{\fill}
+%  \vspace{\fill}
+%  \thispagestyle{empty}
+%  \newpage
+%  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+%\def\@seccntformat#1{\protect\makebox[0pt][r]{\csname the#1\endcsname\quad}}
+%\makeatother
+
+

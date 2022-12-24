@@ -1,0 +1,32 @@
+
+\usepackage{imakeidx}
+
+%% Index entries (italic font for files, preformat for code)
+\newcommand{\hf}[1]{\textit{#1.h90}   \index{h90 files!#1}}
+\newcommand{\ifile}[1]{\textit{#1.nc} \index{Input NetCDF files!#1.nc}}
+\newcommand{\jp}[1]{\texttt{#1}       \index{Model parameters!#1}}
+\newcommand{\key}[1]{\index[keys]{#1}        \texttt{\textbf{key\_#1}}}
+\newcommand{\mdl}[1]{\index[modules]{#1}     \textit{#1.F90}          }
+\newcommand{\ngn}[1]{\index[blocks]{#1}      \texttt{#1}              }
+\newcommand{\np}[1]{ \index[parameters]{#1}  \texttt{#1}              }
+\newcommand{\rou}[1]{\index[subroutines]{#1} \texttt{#1}              }
+
+\indexsetup{toclevel=section, othercode=\small}
+
+\makeindex[intoc=true, name=keys       , title=CPP keys                      ]
+\makeindex[intoc=true, name=modules    , title=Modules                       ]
+\makeindex[intoc=true, name=blocks     , title=Namelist blocks               ]
+\makeindex[intoc=true, name=parameters , title=Namelist parameters, columns=3]
+\makeindex[intoc=true, name=subroutines, title=Subroutines                   ]
+
+
+%% Load hyperref at the end of the preamble to make it work with other pkgs
+\usepackage{hyperref}                    %% hyper
+\hypersetup{
+%  pdftitle={\heading},
+%  pdfauthor={\firstauthor and \secondauthor},
+  colorlinks,
+  citecolor=olive,
+  linkcolor=blue,
+  urlcolor=gray
+}

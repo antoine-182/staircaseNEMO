@@ -1,0 +1,103 @@
+#if defined show_comments
+! These comments are not intended to be retained during preprocessing; i.e. do not define "show_comments"
+!!----------------------------------------------------------------------
+!! NEMO/OCE 4.0 , NEMO Consortium (2018)
+!! Software governed by the CeCILL license (see ./LICENSE)
+!!----------------------------------------------------------------------
+! This header file contains preprocessor definitions and macros used in the do-loop substitutions introduced
+! between version 4.0 and 4.2. The primary aim of these macros is to assist in future applications of tiling
+! to improve performance. This is expected to be achieved by alternative versions of these macros in selected
+! locations. The initial introduction of these macros simply replaces all identifiable nested 2D- and 3D-loops
+! with single line statements (and adjusts indenting accordingly). Do loops are identifiable if they comform
+! to either:
+!                                       DO jk = ....
+!   DO jj = ....                           DO jj = ...
+!      DO ji = ....                           DO ji = ...
+!         .                   OR                 .  
+!         .                                      .
+!     END DO                                  END DO
+!   END DO                                 END DO
+!                                       END DO
+! and white-space variants thereof.
+!
+! Additionally, only loops with recognised jj and ji loops limits are treated; these are:
+! Lower limits of 1, 2 or fs_2
+! Upper limits of jpi, jpim1 or fs_jpim1 (for ji) or jpj, jpjm1 or fs_jpjm1 (for jj)
+!
+! The macro naming convention takes the form: DO_2D_BT_LR where: 
+!   B is the Bottom offset from the PE's inner domain;
+!   T is the Top    offset from the PE's inner domain;
+!   L is the Left   offset from the PE's inner domain;
+!   R is the Right  offset from the PE's inner domain
+!
+! So, given an inner domain of 2,jpim1 and 2,jpjm1, a typical example would replace:
+! 
+!   DO jj = 2, jpj
+!      DO ji = 1, jpim1
+!         .
+!         .
+!      END DO
+!   END DO
+!
+! with:
+!
+!   DO_2D_01_10
+!      .
+!      .
+!   END_2D
+! 
+! similar conventions apply to the 3D loops macros. jk loop limits are retained through macro arguments and are not restricted. This
+! includes the possibility of strides for which an extra set of DO_3DS macros are defined.
+!
+! In the following definitions the inner PE domain is defined by start indices of (___kIs_, __kJs_) and end indices of (__kIe_, __kJe_)
+! The following macros are defined just below: ___kIs_, __kJs_, ___kIsm1_, __kJsm1_, ___kIe_, __kJe_, ___kIep1_, __kJep1_. 
+! These names are chosen to, hopefully, avoid any future, unintended matches elsewhere in the code.
+!
+#endif
+#define __kIs_     2
+#define __kJs_     2
+#define __kIsm1_   1
+#define __kJsm1_   1
+
+#define __kIe_     jpim1
+#define __kJe_     jpjm1
+#define __kIep1_   jpi
+#define __kJep1_   jpj
+
+#define DO_2D_00_00   DO jj = __kJs_, __kJe_   ;   DO ji = __kIs_, __kIe_
+#define DO_2D_00_01   DO jj = __kJs_, __kJe_   ;   DO ji = __kIs_, __kIep1_
+#define DO_2D_00_10   DO jj = __kJs_, __kJe_   ;   DO ji = __kIsm1_, __kIe_
+#define DO_2D_00_11   DO jj = __kJs_, __kJe_   ;   DO ji = __kIsm1_, __kIep1_
+ 
+#define DO_2D_01_00   DO jj = __kJs_, __kJep1_   ;   DO ji = __kIs_, __kIe_
+#define DO_2D_01_01   DO jj = __kJs_, __kJep1_   ;   DO ji = __kIs_, __kIep1_
+#define DO_2D_01_10   DO jj = __kJs_, __kJep1_   ;   DO ji = __kIsm1_, __kIe_
+#define DO_2D_01_11   DO jj = __kJs_, __kJep1_   ;   DO ji = __kIsm1_, __kIep1_
+ 
+#define DO_2D_10_00   DO jj = __kJsm1_, __kJe_   ;   DO ji = __kIs_, __kIe_
+#define DO_2D_10_10   DO jj = __kJsm1_, __kJe_   ;   DO ji = __kIsm1_, __kIe_
+#define DO_2D_10_11   DO jj = __kJsm1_, __kJe_   ;   DO ji = __kIsm1_, __kIep1_
+ 
+#define DO_2D_11_00   DO jj = __kJsm1_, __kJep1_   ;   DO ji = __kIs_, __kIe_
+#define DO_2D_11_01   DO jj = __kJsm1_, __kJep1_   ;   DO ji = __kIs_, __kIep1_
+#define DO_2D_11_10   DO jj = __kJsm1_, __kJep1_   ;   DO ji = __kIsm1_, __kIe_
+#define DO_2D_11_11   DO jj = __kJsm1_, __kJep1_   ;   DO ji = __kIsm1_, __kIep1_
+
+#define DO_3D_00_00(ks,ke)   DO jk = ks, ke   ;   DO_2D_00_00
+#define DO_3D_00_10(ks,ke)   DO jk = ks, ke   ;   DO_2D_00_10
+ 
+#define DO_3D_01_01(ks,ke)   DO jk = ks, ke   ;   DO_2D_01_01
+ 
+#define DO_3D_10_00(ks,ke)   DO jk = ks, ke   ;   DO_2D_10_00
+#define DO_3D_10_10(ks,ke)   DO jk = ks, ke   ;   DO_2D_10_10
+#define DO_3D_10_11(ks,ke)   DO jk = ks, ke   ;   DO_2D_10_11
+ 
+#define DO_3D_11_11(ks,ke)   DO jk = ks, ke   ;   DO_2D_11_11
+
+#define DO_3DS_00_00(ks,ke,ki)   DO jk = ks, ke, ki   ;   DO_2D_00_00
+#define DO_3DS_01_01(ks,ke,ki)   DO jk = ks, ke, ki   ;   DO_2D_01_01
+#define DO_3DS_10_10(ks,ke,ki)   DO jk = ks, ke, ki   ;   DO_2D_10_10
+#define DO_3DS_11_11(ks,ke,ki)   DO jk = ks, ke, ki   ;   DO_2D_11_11
+
+#define END_2D   END DO   ;   END DO
+#define END_3D   END DO   ;   END DO   ;   END DO

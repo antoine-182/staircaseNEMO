@@ -1,0 +1,17 @@
+
+## Defaults
+$silent   = 1;
+$pdf_mode = 1;
+
+## Using relative paths
+$ENV{'openout_any'}='a';
+$out_dir = '../build';
+
+## Custom cmds
+$makeindex = 'makeindex -s %R.ist %O -o %D %S';
+$pdflatex  = 'pdflatex -shell-escape %O %S';
+
+#@BIBINPUTS=('.', '../main');
+#$bibtex    = 'bibtex %O ../main/bibliography.bib';
+#$kpsewhich = 'kpsewhich bibliography.bib'
+

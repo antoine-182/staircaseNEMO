@@ -1,0 +1,22 @@
+% ================================================================
+% Foreword
+% ================================================================
+\chapter*{Foreword}
+
+The ocean engine of NEMO (Nucleus for European Modelling of the Ocean) is a primitive equation model adapted to
+regional and global ocean circulation problems.
+It is intended to be a flexible tool for studying the ocean and its interactions with the others components of
+the earth climate system over a wide range of space and time scales.
+
+Prognostic variables are the three-dimensional velocity field, a non-linear sea surface height,
+the \textit{Conservative} Temperature and the \textit{Absolute} Salinity.
+In the horizontal direction, the model uses a curvilinear orthogonal grid and in the vertical direction,
+a full or partial step $z$-coordinate, or $s$-coordinate, or a mixture of the two.
+The distribution of variables is a three-dimensional Arakawa C-type grid.
+Various physical choices are available to describe ocean physics, including TKE, and GLS vertical physics.
+
+Within NEMO, the ocean is interfaced with a sea-ice model (SI$^3$)
+ %or \href{https://github.com/CICE-Consortium/CICE}{CICE}),
+passive tracer and biogeochemical models (TOP-PISCES) and,
+via the \href{https://portal.enes.org/oasis}{OASIS} coupler, with several atmospheric general circulation models.
+It also support two-way grid embedding via the \href{http://agrif.imag.fr}{AGRIF} software.

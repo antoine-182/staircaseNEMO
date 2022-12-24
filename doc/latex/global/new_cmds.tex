@@ -1,0 +1,37 @@
+%% Global custom commands: \newcommand{<name>}[<args>][<first argument value>]{<code>}
+%% ==============================================================================
+
+%% Include references and index for compilation of single subfile 
+\newcommand{\mtoc}{\minitoc}
+\newcommand{\biblio}{\bibliography{../main/bibliography}}
+\newcommand{\pindex}{\printindex}
+
+%% NEMO and Fortran in small capitals
+\newcommand{\NEMO}{\textsc{nemo}~}
+\newcommand{\fortran}{\textsc{Fortran}~}
+\newcommand{\fninety}{\textsc{Fortran 90}~}
+
+%% Common aliases
+\renewcommand{\deg}[1][]{\ensuremath{^{\circ}#1}}
+\newcommand{\zstar }{\ensuremath{z^\star}}
+\newcommand{\sstar }{\ensuremath{s^\star}}
+\newcommand{\ztilde}{\ensuremath{\tilde z}}
+\newcommand{\stilde}{\ensuremath{\tilde s}}
+\newcommand{\ie}{\ensuremath{i.e.}~}
+\newcommand{\eg}{\ensuremath{e.g.}~}
+
+%% Inline maths
+\newcommand{\fractext}[2]{\textstyle \frac{#1}{#2}}
+\newcommand{\rdt}{\Delta t}
+
+%% Text env. for Gurvan
+\newcommand{\gmcomment}[1]{}
+
+%% Maths
+\newcommand{\lt}{\left}
+\newcommand{\rt}{\right}
+\newcommand{\vect}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\pd}[2][]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+
+%% Workaround for issue with \listoffigures
+\DeclareRobustCommand{\triad}[6][]{\ensuremath{{}_{#2}^{#3}{\mathbb{#4}_{#1}}_{#5}^{\,#6}}}

@@ -1,0 +1,109 @@
+
+%% ==============================================================================
+%% Template structure for reference manual
+%% ==============================================================================
+
+%% NEMO release version
+\def \version{4.0rc~}
+
+%% Preamble
+%% ==============================================================================
+
+%% Document layout
+\documentclass[draft]{scrreprt}
+
+%% Load the configuration of the manual
+\input{../main/definitions}
+
+%% Load global *.tex files
+\input{../../global/preamble}
+
+\dominitoc
+
+%% Launch the creation of the indexes
+\input{../../global/indexes}
+
+
+%% End of common preamble between main and sub-files
+%% Override custom cmds for full manual compilation
+\newcommand{\onlyinsubfile}[1]{#1}
+\newcommand{\notinsubfile}[1]{}
+
+\begin{document}
+
+\renewcommand{\onlyinsubfile}[1]{}
+\renewcommand{\notinsubfile}[1]{#1}
+
+\renewcommand{\biblio}{}
+\renewcommand{\pindex}{}
+
+
+%% Frontmatter
+%% ==============================================================================
+
+\pagenumbering{gobble}
+
+%% Title page
+\input{../../global/frontpage}
+
+\maketitle
+\emptythanks
+
+%% Information page (2nd page)
+\input{../../global/info_page}
+
+%% Foreword
+%\frontmatter   %% Chapter numbering off and Roman numerals for page numbers
+\pagenumbering{roman}
+\input{foreword}
+
+%% Table of Contents
+\tableofcontents
+\listoffigures
+\listoftables
+\listoflistings
+
+\clearpage
+%\end{document}
+
+
+%% Mainmatter
+%% ==============================================================================
+
+%\mainmatter   %% Chapter numbering on, page numbering is reset with Arabic numerals
+\pagenumbering{arabic}
+
+\include{chapters}
+
+
+%% Appendix
+%% ==============================================================================
+
+%% Chapter numbering is reset with letters now
+\appendix   
+
+\include{appendices}
+
+
+%% Backmatter
+%% ==============================================================================
+
+%\backmatter   %% Chapter numbering off
+
+%% Bibliography
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{../main/bibliography}
+
+%% Index
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Indexes}
+\printindex[keys]
+\printindex[modules]
+\printindex[blocks]
+\printindex[parameters]
+\printindex[subroutines]
+
+\end{document}
+
